@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mysawonMapper">
+
+	<insert id="sawonAdd" parameterType="mySawon">   <!-- mysawon 테이블에 관한 sql 쿼리 -->
+		INSERT
+		INTO mysawon (id, pwd, name, hiredate, age) VALUES (#{id}, #{pwd}, #{name}, curDate(), #{age} )
+	</insert>
+	
+	
+	<delete id="sawonDel" parameterType="String" >
+		DELETE FROM mysawon
+		WHERE id =#{VALUE}  <!-- #{VALUE}는 파라미터에서 단순한 값을 받아서 넣는다는 의미  -->
+	</delete>
+	
+	
+	<select id ="sawonAll" resultType="MySawon">
+		SELECT
+		num, id, name, hiredate, age 
+		FROM  mysawon
+	</select>
+	
+	
+	<select id ="login" parameterType="MySawon" resultType="MySawon">
+		SELECT
+		num, id, name, hiredate, age 
+		FROM  mysawon
+		WHERE id=#{id} AND pwd=#{pwd}
+	</select>
+</mapper>
